@@ -25,54 +25,27 @@
         font-size: 14px;
         line-height: 1.5;
         font-weight: bold;
-        color: #FFFFFF;
-        text-shadow: 0 0 8px #ffdd55, 0 0 12px #ffaa00;
+        color: #FFD700;  /* golden */
+        text-shadow: 
+            0 0 6px #ffdd55, 
+            0 0 12px #ffaa00,
+            0 0 18px #ffcc33;
         white-space: pre-wrap;
         text-align: left;
-    }
-
-    /* Type cursor blink */
-    .typing {
-        border-right: 2px solid #FFD700;
-        padding-right: 5px;
-        animation: blink 0.7s infinite;
-    }
-
-    @keyframes blink {
-        0% { border-color: transparent; }
-        50% { border-color: #FFD700; }
-        100% { border-color: transparent; }
     }
 </style>
 </head>
 
 <body>
 
-<!-- TOP LEFT TYPING WISHES -->
+<!-- TOP LEFT STATIC WISHES -->
 <div class="typing-box">
-    <span id="typingText" class="typing"></span>
-</div>
-
-<script>
-    const text = 
-`In this holy month of Ramadan, may you be blessed with good health,
+In this holy month of Ramadan, may you be blessed with good health,
 happiness, peace and prosperity.
 
-Ramadan Kareem Mubarak 
-       — Taher 🌙✨`;
-
-    let i = 0;
-
-    function typeWriter() {
-        if (i < text.length) {
-            document.getElementById("typingText").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 35);
-        }
-    }
-
-    typeWriter();
-</script>
+Ramadan Kareem Mubarak  
+       — Taher 🌙✨
+</div>
 
 </body>
 </html>
