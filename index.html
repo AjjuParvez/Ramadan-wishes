@@ -16,22 +16,22 @@
         overflow: hidden;
     }
 
-    /* TOP RIGHT TYPING TEXT */
+    /* TOP LEFT GOLDEN TEXT */
     .typing-box {
         position: absolute;
         top: 20px;
-        right: 20px;
-        max-width: 45%;
-        text-align: right;
+        left: 20px;
+        max-width: 80%;
         font-size: 14px;
         line-height: 1.5;
         font-weight: bold;
         color: #FFD700;
         text-shadow: 0 0 8px #ffdd55, 0 0 12px #ffaa00;
         white-space: pre-wrap;
+        text-align: left;
     }
 
-    /* TYPEWRITER EFFECT */
+    /* Type cursor blink */
     .typing {
         border-right: 2px solid #FFD700;
         padding-right: 5px;
@@ -43,21 +43,20 @@
         50% { border-color: #FFD700; }
         100% { border-color: transparent; }
     }
-
 </style>
 </head>
 
 <body>
 
-<!-- TOP RIGHT WISHES -->
+<!-- TOP LEFT TYPING WISHES -->
 <div class="typing-box">
     <span id="typingText" class="typing"></span>
 </div>
 
 <script>
     const text = 
-`In this holy month of Ramadan, may you be blessed 
-with good health, happiness, peace and prosperity.
+`In this holy month of Ramadan, may you be blessed with good health,
+happiness, peace and prosperity.
 
 Happy Blessed Ramadan — Taher 🌙✨`;
 
@@ -67,7 +66,7 @@ Happy Blessed Ramadan — Taher 🌙✨`;
         if (i < text.length) {
             document.getElementById("typingText").innerHTML += text.charAt(i);
             i++;
-            setTimeout(typeWriter, 40);
+            setTimeout(typeWriter, 35);
         }
     }
 
