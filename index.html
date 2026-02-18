@@ -1,58 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wishes from Taher 🌙✨</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ramadan Wishes from Taher 🌙✨</title>
 
-<!-- WHATSAPP PREVIEW -->
-<meta property="og:title" content="Wishes from Taher 🌙✨">
+<!-- Link preview -->
+<meta property="og:title" content="Ramadan Wishes from Taher 🌙✨">
 <meta property="og:description" content="Click to view the special Ramadan message.">
 <meta property="og:image" content="https://ajjuparvez.github.io/Ramadan-wishes/photo.jpeg">
 <meta property="og:url" content="https://ajjuparvez.github.io/Ramadan-wishes/">
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: url("photo.jpeg") no-repeat center center fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    /* TOP LEFT WHITE TEXT */
-    .wish-text {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        max-width: 80%;
-        font-size: 14px;
-        line-height: 1.5;
-        font-weight: bold;
-        color: white;   /* WHITE FONT */
-        text-shadow:
-            0 0 6px rgba(0,0,0,0.6),
-            0 0 12px rgba(0,0,0,0.5),
-            0 0 18px rgba(0,0,0,0.4); /* soft shadow for clear visibility */
-        white-space: pre-wrap;
-        text-align: left;
-    }
+  body{
+    margin:0; padding:0;
+    background:url("photo.jpeg") no-repeat center center fixed;
+    background-size:cover;
+    font-family:Arial, sans-serif;
+    height:100vh; overflow:hidden;
+  }
+  .wish-text{
+    position:absolute; top:20px; left:20px; max-width:80%;
+    font-size:14px; line-height:1.5; font-weight:bold; color:#fff;
+    text-shadow:0 0 6px rgba(0,0,0,.6), 0 0 12px rgba(0,0,0,.5), 0 0 18px rgba(0,0,0,.4);
+    white-space:pre-wrap; text-align:left;
+  }
+  /* Tiny hint (auto hides after unmute) */
+  .tap-hint{
+    position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+    background:rgba(0,0,0,.45); color:#fff; padding:6px 10px; font-size:12px;
+    border-radius:10px; opacity:.9; transition:opacity .4s ease; pointer-events:none;
+  }
+  .tap-hint.hide{ opacity:0; }
 </style>
 </head>
-
 <body>
 
-<!-- CLEAN WHITE WISHES ON BACKGROUND -->
 <div class="wish-text">
-In this holy month of Ramadan, may you be blessed with good health, happiness, peace and prosperity.
+In this holy month of Ramadan, may you be blessed with good health,
+happiness, peace and prosperity.
 
-Ramadan Kareem Mubarak
-Remember me in your Prayers🤲
-    — Taher 🌙✨
+Happy Blessed Ramadan — Taher 🌙✨
 </div>
+
+<div id="tapHint" class="tap-hint">Tap anywhere to unmute music</div>
+
+<!-- 1) Load YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<!-- 2) Invisible YouTube player (audio only) -->
+<div id="yt-holder" style="position:fixed; left:0; bottom:0; width:1px; height:1px; opacity:0; pointer-events:none;"></div>
+
+<script>
+  // Replace with your YouTube VIDEO ID
+  const YT_VIDEO_ID = 'VIDEO_ID_HERE';  // e.g., 'dQw4w9WgXcQ'
+
+  let ytPlayer;
+  function onYouTubeIframeAPIReady(){
+    ytPlayer = new YT.Player('yt-holder',{
+      width: 1,
+      height: 1,
+      videoId: YT_VIDEO_ID,
+      playerVars: {
+        autoplay: 1,     // start automatically
+        mute: 1,         // start muted (required for autoplay)
+        loop: 1,         // loop
+        playlist: YT_VIDEO_ID, // needed for loop
+        controls: 0,
+        modestbranding: 1,
+        playsinline: 1,
+        rel: 0
+      },
+      events: {
+        onReady: (e) => {
+          // try to start muted (in case browser paused)
+          try { e.target.playVideo(); } catch(_) {}
+        }
+      }
+    });
+  }
+
+  // Unmute on first user interaction (tap/click/keydown/touchstart)
+  const hint = document.getElementById('tapHint');
+  const unmuteOnce = () => {
+    if (ytPlayer && ytPlayer.unMute) {
+      try {
+        ytPlayer.unMute();
+        ytPlayer.setVolume(25); // 0–100 (soft)
+        ytPlayer.playVideo();
+      } catch(_) {}
+    }
+    if (hint){ hint.classList.add('hide'); setTimeout(()=>hint.remove(), 600); }
+    window.removeEventListener('click', unmuteOnce);
+    window.removeEventListener('touchstart', unmuteOnce);
+    window.removeEventListener('keydown', unmuteOnce);
+  };
+  window.addEventListener('click', unmuteOnce, { once:true, passive:true });
+  window.addEventListener('touchstart', unmuteOnce, { once:true, passive:true });
+  window.addEventListener('keydown', unmuteOnce, { once:true });
+</script>
 
 </body>
 </html>
